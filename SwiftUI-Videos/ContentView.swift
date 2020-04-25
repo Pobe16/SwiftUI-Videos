@@ -9,13 +9,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    var videos: [Video] = []
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            List(videos) { (item: Video) in
+                Image(item.imageName)
+                .resizable()
+                    .scaledToFit()
+                    .frame(height: 90.0)
+                    .cornerRadius(8)
+                Spacer().frame(width: 16)
+                VStack(alignment: .leading, spacing: 20.0) {
+                    Text(item.title)
+                        .fontWeight(.semibold)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.75)
+                    Text(item.uploadDate)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                }
+            }.navigationBarTitle("Sean's Videos")
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(videos: Videos.topTwelve)
     }
 }
